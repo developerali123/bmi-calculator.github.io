@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 15px;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            border: 2px solid black;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            width:30vw;
+            background-image: linear-gradient(to top, rgb(101, 115, 255), rgb(122, 113, 238), rgb(143, 112, 220), rgb(164, 110, 203), rgb(185, 109, 185), rgb(206, 107, 168), rgb(178, 125, 175), rgb(149, 143, 181), rgb(121, 162, 188), rgb(92, 180, 194), rgb(64, 198, 201), rgb(35, 216, 207));
+        }
+        input{
+            padding: 10px;
+        }
+        input:focus{
+            background-color: pink;
+        }
+        button{
+            padding: 10px;
+            font-size: 20px;
+            border-radius: 10px;
+            background-color: red;
+            transition: 1s;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: pink;
+        }
+        li{
+            font-size: 18px;
+        }
+        label{
+            font-size: 25px;
+        }
+        h1{
+            font-size: 40px;
+        }
+        #result{
+            font-size: 30px;
+            font-weight: bold;
+        }
+        @media screen and (max-width:768px) {
+            h1{
+                font-size: 30px;
+            }
+            .container{
+                width:70vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BMI calculator</h1>
+        <div>
+        <label for="">height in cm</label><input type="number" name="" id="cm">
+    </div>
+    <div>
+        <label for="">weight in kg</label><input type="number" name="" id="kg">
+    </div>
+        <button type="submit" id="submit">submit</button>
+        <div id="result"></div>
+        <div id="weightguide">
+            <h2>BMI calculator guide</h2>
+            <ul>
+                <li>under weight less than 18.5</li>
+                <li>Normal range between18.5 and 24.5</li>
+                <li>over-weight greater than 24.5</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        //BMI=KG/(H/100*H/100)
+        document.getElementById("submit").addEventListener("click",function(){
+            var output;
+            var cm=parseFloat(document.getElementById("cm").value);
+            cm=cm/100;
+            var kg=parseFloat(document.getElementById("kg").value);
+            var bmi=kg/(cm*cm);
+            bmi=bmi.toFixed(1);
+            if(bmi<=18.5){
+                output="under-weight";
+            }
+            else if(bmi>18.5||bmi<=24.5){
+                output="normal";
+            }
+            else{
+                output="over-weight";
+            }
+            // console.log(bmi);
+            document.getElementById("result").innerHTML="your BMI is: " + bmi+ " and this is considered "+output;
+        });
+    </script>
+</body>
+</html>
