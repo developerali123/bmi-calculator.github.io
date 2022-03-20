@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BMI calculator</title>
     <style>
         *{
             margin: 15px;
@@ -21,7 +21,7 @@
             display: flex;
             flex-direction: column;
             width:30vw;
-            background-image: linear-gradient(to top, rgb(101, 115, 255), rgb(122, 113, 238), rgb(143, 112, 220), rgb(164, 110, 203), rgb(185, 109, 185), rgb(206, 107, 168), rgb(178, 125, 175), rgb(149, 143, 181), rgb(121, 162, 188), rgb(92, 180, 194), rgb(64, 198, 201), rgb(35, 216, 207));
+            background: greenyellow;
         }
         input{
             padding: 10px;
@@ -48,6 +48,8 @@
         }
         h1{
             font-size: 40px;
+            text-decoration: underline solid red;
+            text-underline-offset:5px;
         }
         #result{
             font-size: 30px;
@@ -67,10 +69,10 @@
     <div class="container">
         <h1>BMI calculator</h1>
         <div>
-        <label for="">height in cm</label><input type="number" name="" id="cm">
+        <label for="">height in cm</label><input type="text" name="" id="cm" value="0" required>
     </div>
     <div>
-        <label for="">weight in kg</label><input type="number" name="" id="kg">
+        <label for="">weight in kg</label><input type="text" name="" id="kg" value="0" required>
     </div>
         <button type="submit" id="submit">submit</button>
         <div id="result"></div>
@@ -88,21 +90,26 @@
         document.getElementById("submit").addEventListener("click",function(){
             var output;
             var cm=parseFloat(document.getElementById("cm").value);
-            cm=cm/100;
             var kg=parseFloat(document.getElementById("kg").value);
+            console.log(cm);
+            if(kg==""||cm==""){
+                document.getElementById("result").innerHTML="please enter value";
+            }else{
+            cm=cm/100;
             var bmi=kg/(cm*cm);
             bmi=bmi.toFixed(1);
-            if(bmi<=18.5){
+            if(bmi<18.5){
                 output="under-weight";
             }
-            else if(bmi>18.5||bmi<=24.5){
+            else if(bmi>18.5&&bmi<=24.5){
                 output="normal";
             }
-            else if(bmi>24.5){
+            else{
                 output="over-weight";
             }
             // console.log(bmi);
             document.getElementById("result").innerHTML="your BMI is: " + bmi+ " and this is considered "+output;
+        }
         });
     </script>
 </body>
